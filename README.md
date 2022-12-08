@@ -34,7 +34,7 @@ fn main() {
 ```
 
 ## Startup function and particle creation
-
+To create particles we need to create materials and meshes for them. We do that by using structs
 ``` rust
 
 //Simple struct to handle the  particles material
@@ -50,31 +50,34 @@ struct Meshes {
 }
 
 ```
-
+## Mesh and Material creation
+We then need to create the meshes and materials as you see down below. For the app to recognise the meshes and material we need to insert them into the apps commands.
 ``` rust
 //Creates a resource for the circle meshes
 commands.insert_resource(Meshes {
         sphere: meshes.add(Mesh::from(shape::Icosphere {
-            radius: 1.,
-            subdivisions: 4,
+            radius: 1., //Radius of the circle
+            subdivisions: 4, //Devides the circle into n areas. More subdivisions mean rounder circle
         })),
     });
  
  //Creates a resource for the color meshes
  commands.insert_resource(Materials {
         blue: materials.add(StandardMaterial {
-            base_color: Color::rgb(0.4, 0.4, 0.6),
-            unlit: true,
+            base_color: Color::rgb(0.4, 0.4, 0.6), //Materials color
+            unlit: true, //Bool value that checks whether to apply only the base color to this material.
             ..Default::default()
         }),
     });
 
 ```
- 
+ ## Creating and spawning a camera
+ To see what happens on the screen when we run the program we need a camera. We'll use this simple camera3dBundle that can be found inm bevys cheatcode Book.
+ After creating the bundle we need to spawn it in using commands.spawn()
 ``` rust
 //Creates a 3d camera and adds it to the scene
 commands.spawn(Camera3dBundle {
-        transform: Transform::from_translation(Vec3::new(0., 0., 100.)),
+        transform: Transform::from_translation(Vec3::new(0., 0., 100.)), //Where to position the camera
         projection: bevy::prelude::Projection::Orthographic(OrthographicProjection {
             scale: 0.01,
             ..Default::default()
@@ -83,6 +86,8 @@ commands.spawn(Camera3dBundle {
     });
 ```
 
+ ## Spawning rectangles for collision testing
+ To check whether the particles can collide with other surfaces we need to spawn in other objects such as a rectangle. The code below shows a simple way to do just that.
 ``` rust
 //Example of how to spawn a rectangle into the scene
 let size = Vec2::new(10., 2.);
@@ -99,7 +104,8 @@ let size = Vec2::new(10., 2.);
             ..Default::default()
         });
 ```
-
+## pawning the particles
+Looks similar to the rectangle bundle with a few changes to handle the position and velocity of the particles when spawned in. ParticleBundle contains all variables need for the particle physics (Code inside of src/entity.rs).
 ``` rust
 //Example of how to spawn in a particle
 commands
