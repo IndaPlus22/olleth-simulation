@@ -1,21 +1,25 @@
 # olleth-simulation
-The particle simulation runs on bevy, a relativly new rust game engine. The example folder contains the different stages of completetion. The src folder handles the physics behind the particles when they are spawned in.
+
+Chapter 1 :atom_symbol: particle system project :atom_symbol:
+
+## Description
+The particle simulation runs on bevy, a relativly new rust game engine. The example folder contains the different stages of completetion. The src folder handles the physics behind the particles when they are spawned in. 
 
 ### Example Folder
-* simple.rs - Simplest example of how bevy operates.
-* particle_collisions.rs - checks that the collision physics is operating correctly.
-* different_masses.rs - checks if the physics behind particles with the different masses works arcordingly.
-* marble_pour.rs - A simple testing ground for particle system.
-* ball_stacking.rs - Work in Progress...
+* `simple.rs` - Simplest example of how bevy operates.
+* `particle_collisions.rs` - checks that the collision physics is operating correctly.
+* `different_masses.rs` - checks if the physics behind particles with the different masses works arcordingly.
+* `marble_pour.rs` - A simple testing ground for particle system.
+* `ball_stacking.rs` - Work in Progress...
 
 ## Main function
-To create a new program you need to create a app. to develop it you'll need to add resources, plugins that handles the underlying functions of your program. add_systems handles all functions that control what happens on the frontend for example, spawning in marbles and despawning them. I have also added a startup system which gets added before all other systems using .add_startup system. Dont forget to add the .run() in the end for the app to run!
+To create a new program you need to create a app. to develop it you'll need to add resources, plugins that handles the underlying functions of your program. add_systems handles all functions that control what happens on the frontend for example, spawning in marbles and despawning them. I have also added a startup system which gets added before all other systems using .add_startup system. Dont forget to add the `.run()` in the end for the app to run!
 
 ### Example of how a main function looks like
-* XPBDPlugin: contains the physics behind the particles movement.
-* startup: Startup function.
-* spawn_marbles: Function that handles the spawning of particles.
-* despawn_marbles and despawn_marbles_at_height: handles how the particles despawn, either from user input or height. Exists to keep performance high.
+* `XPBDPlugin::default()`: contains the physics behind the particles movement.
+* `startup`: Startup function.
+* `spawn_marbles`: Function that handles the spawning of particles.
+* `despawn_marbles` and despawn_marbles_at_height: handles how the particles despawn, either from user input or height. Exists to keep performance high.
 ``` rust
 
 fn main() {
@@ -78,7 +82,7 @@ commands.insert_resource(Meshes {
 ```
  ## Creating and spawning a camera
  To see what happens on the screen when we run the program we need a camera. We'll use this simple camera3dBundle that can be found inm bevys cheatcode Book.
- After creating the bundle we need to spawn it in using commands.spawn()
+ After creating the bundle we need to spawn it in using `commands.spawn()`.
 ``` rust
 //Creates a 3d camera and adds it to the scene
 commands.spawn(Camera3dBundle {
