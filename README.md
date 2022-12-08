@@ -1,7 +1,7 @@
 # olleth-simulation
-The particle simulation runs on bevy, a relativly new rust game engine. The example folder contains the different stages of completetion.
+The particle simulation runs on bevy, a relativly new rust game engine. The example folder contains the different stages of completetion. The src folder handles the physics behind the particles when they are spawned in.
 
-###Example Folder
+### Example Folder
 * simple.rs - Simplest example of how bevy operates.
 * particle_collisions.rs - checks that the collision physics is operating correctly.
 * different_masses.rs - checks if the physics behind particles with the different masses works arcordingly.
