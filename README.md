@@ -104,7 +104,7 @@ let size = Vec2::new(10., 2.);
             ..Default::default()
         });
 ```
-## pawning the particles
+## Spawning the particles
 Looks similar to the rectangle bundle with a few changes to handle the position and velocity of the particles when spawned in. ParticleBundle contains all variables need for the particle physics (Code inside of src/entity.rs).
 ``` rust
 //Example of how to spawn in a particle
