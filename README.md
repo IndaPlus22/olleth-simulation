@@ -11,10 +11,10 @@ The particle simulation runs on bevy, a relativly new rust game engine. The exam
 ## Main function
 To create a new program you need to create a app. to develop it you'll need to add resources, plugins that handles the underlying functions of your program. add_systems handles all functions that control what happens on the frontend for example, spawning in marbles and despawning them. I have also added a startup system which gets added before all other systems using .add_startup system. Dont forget to add the .run() in the end for the app to run!
 
-### Example of how a main function looks like.
-* XPBDPlugin: contains the physics behind the particles movement
-* startup: Startup function
-* spawn_marbles: Function that handles the spawning of particles
+### Example of how a main function looks like
+* XPBDPlugin: contains the physics behind the particles movement.
+* startup: Startup function.
+* spawn_marbles: Function that handles the spawning of particles.
 * despawn_marbles and despawn_marbles_at_height: handles how the particles despawn, either from user input or height. Exists to keep performance high.
 ``` rust
 
