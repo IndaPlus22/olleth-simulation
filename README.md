@@ -25,39 +25,48 @@ fn main() {
 
 ``` rust
 
-fn spawn_marbles(
-    mut commands: Commands,
-    materials: Res<Materials>, 
-    meshes: Res<Meshes>, 
-    buttons: Res<Input<MouseButton>>,
-    windows: Res<Windows>
-) {
-    let win = windows.get_primary().expect("no primary window");
-    if buttons.pressed(MouseButton::Left) {
-
-        let mouse_pos = win.cursor_position().unwrap();
-        println!("{}, {}", mouse_pos.x / 100., mouse_pos.y / 100.);
-
-        let radius = 0.1;
-        let pos = Vec2::new(random::<f32>() - 0.5 + (mouse_pos.x / 100. - 8.5), random::<f32>() - 0.5 + (mouse_pos.y / 100. - 8.8)) * 0.5 + Vec2::Y * 3.;
-        let vel = Vec2::new(random::<f32>() - 0.5, random::<f32>() - 0.5);
-        commands
-            .spawn(PbrBundle {
-                mesh: meshes.sphere.clone(),
-                material: materials.blue.clone(),
-                transform: Transform {
-                    scale: Vec3::splat(radius),
-                    translation: pos.extend(0.),
-                    ..Default::default()
-                },
-                ..Default::default()
-            })
-            .insert(ParticleBundle {
-                collider: CircleCollider { radius },
-                ..ParticleBundle::new_with_pos_and_vel(pos, vel)
-            }); 
-    }
-    
+//Simple struct to handle the  particles material
+#[derive(Resource)]
+struct Materials {
+    blue: Handle<StandardMaterial>,
 }
 
+//Simple struct to handle the particle meshes
+#[derive(Resource)]
+struct Meshes {
+    sphere: Handle<Mesh>,
+}
+
+```
+
+``` rust
+//Creates a resource for the circle meshes
+commands.insert_resource(Meshes {
+        sphere: meshes.add(Mesh::from(shape::Icosphere {
+            radius: 1.,
+            subdivisions: 4,
+        })),
+    });
+ 
+ //Creates a resource for the color meshes
+ commands.insert_resource(Materials {
+        blue: materials.add(StandardMaterial {
+            base_color: Color::rgb(0.4, 0.4, 0.6),
+            unlit: true,
+            ..Default::default()
+        }),
+    });
+
+```
+ 
+``` rust
+//Creates a 3d camera and adds it to the scene
+commands.spawn(Camera3dBundle {
+        transform: Transform::from_translation(Vec3::new(0., 0., 100.)),
+        projection: bevy::prelude::Projection::Orthographic(OrthographicProjection {
+            scale: 0.01,
+            ..Default::default()
+        }),
+        ..Camera3dBundle::default()
+    });
 ```
