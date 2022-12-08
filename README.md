@@ -12,7 +12,7 @@ The particle simulation runs on bevy, a relativly new rust game engine. The exam
 * `marble_pour.rs` - A simple testing ground for particle system.
 * `ball_stacking.rs` - Work in Progress...
 
-To run any of the examples write `cargo run --example "example_program"`. Don't add the .rs at the end!
+To run the testing ground or any other example write `cargo run --example marble_pour`. Don't add the .rs at the end!
 
 ## Main function
 To create a new program you need to create a app. to develop it you'll need to add resources, plugins that handles the underlying functions of your program. add_systems handles all functions that control what happens on the frontend for example, spawning in marbles and despawning them. I have also added a startup system which gets added before all other systems using .add_startup system. Dont forget to add the `.run()` in the end for the app to run!
