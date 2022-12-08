@@ -1,7 +1,7 @@
 # olleth-simulation
 Particle Simulation in rust
 
-´´´rust
+``` rust
 
 fn main() {
     App::new()
@@ -21,4 +21,4 @@ fn main() {
         .run();
 }
 
-´´´
+```
