@@ -3,7 +3,7 @@
 Chapther 4-5 ish... :atom_symbol: particle system with an ounce of physics project :atom_symbol:
 
 ## Description
-The particle simulation runs on bevy, a relativly new rust game engine. The example folder contains the different stages of completetion. The src folder handles the physics behind the particles when they are spawned in. 
+The particle simulation runs on bevy, a relativly new rust game engine. The example folder contains the different stages of completetion. The src folder handles the physics behind the particles when they are spawned in. I won't go into detail how the physics behind it works only that it's based on XPBD simulation. But if your interested you can look for yourself inside the src folder. 
 
 ### Example Folder
 * `simple.rs` - Simplest example of how bevy operates.
@@ -14,6 +14,12 @@ The particle simulation runs on bevy, a relativly new rust game engine. The exam
 
 To run the testing ground or any other example write `cargo run --example marble_pour`. Don't add the .rs at the end!
 
+### Src Folder
+* `components.rs` - Contain structs that act as components for the particles.
+* `entity.rs` - Cointain the struct ParticleBundle as well as static object bundles.
+* `lib.rs` - Contains the calculation functions (updating position and velocity) and building the the physics plugin.
+* `resources.rs` - Contains the structs involved in collision and the gravity struct.
+
 ## Main function
 To create a new program you need to create a app. to develop it you'll need to add resources, plugins that handles the underlying functions of your program. add_systems handles all functions that control what happens on the frontend for example, spawning in marbles and despawning them. I have also added a startup system which gets added before all other systems using .add_startup system. Dont forget to add the `.run()` in the end for the app to run!
 
@@ -22,8 +28,8 @@ To create a new program you need to create a app. to develop it you'll need to a
 * `startup` - Startup function.
 * `spawn_marbles` - Function that handles the spawning of particles.
 * `despawn_marbles` and `despawn_marbles_at_height` - handles how the particles despawn, either from user input or height. Exists to keep performance high.
-``` rust
 
+``` rust
 fn main() {
     App::new()
         .insert_resource(ClearColor(Color::rgb(0.8, 0.8, 0.9)))
@@ -41,13 +47,12 @@ fn main() {
         .add_system(despawn_marbles_at_height)
         .run();
 }
-
 ```
 
 ## Startup function and particle creation
 To create particles we need to create materials and meshes for them. We do that by using structs.
-``` rust
 
+``` rust
 //Simple struct to handle the  particles material
 #[derive(Resource)]
 struct Materials {
@@ -82,9 +87,11 @@ commands.insert_resource(Meshes {
     });
 
 ```
+
  ## Creating and spawning a camera
  To see what happens on the screen when we run the program we need a camera. We'll use this simple camera3dBundle that can be found inm bevys cheatcode Book.
  After creating the bundle we need to spawn it in using `commands.spawn()`.
+ 
 ``` rust
 //Creates a 3d camera and adds it to the scene
 commands.spawn(Camera3dBundle {
@@ -99,6 +106,7 @@ commands.spawn(Camera3dBundle {
 
  ## Spawning rectangles for collision testing
  To check whether the particles can collide with other surfaces we need to spawn in other objects such as a rectangle. The code below shows a simple way to do just that.
+ 
 ``` rust
 //Example of how to spawn a rectangle into the scene
 let size = Vec2::new(10., 2.);
@@ -115,8 +123,10 @@ let size = Vec2::new(10., 2.);
             ..Default::default()
         });
 ```
+
 ## Spawning the particles
 Looks similar to the rectangle bundle with a few changes to handle the position and velocity of the particles when spawned in. ParticleBundle contains all variables need for the particle physics (Code inside of src/entity.rs).
+
 ``` rust
 //Example of how to spawn in a particle
 commands
