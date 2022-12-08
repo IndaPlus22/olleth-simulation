@@ -1,7 +1,12 @@
 # olleth-simulation
-Particle Simulation in rust
+The particle simulation runs on bevy, a relativly new rust game engine. The example folder contains the different stages of completetion.
 
-The particle simulation runs on bevy, a relativly new rust game engine. 
+###Example Folder
+* simple.rs - Simplest example of how bevy operates.
+* particle_collisions.rs - checks that the collision physics is operating correctly.
+* different_masses.rs - checks if the physics behind particles with the different masses works arcordingly.
+* marble_pour.rs - A simple testing ground for particle system.
+* ball_stacking.rs - Work in Progress...
 
 ## Main function
 To create a new program you need to create a app. to develop it you'll need to add resources, plugins that handles the underlying functions of your program. add_systems handles all functions that control what happens on the frontend for example, spawning in marbles and despawning them. I have also added a startup system which gets added before all other systems using .add_startup system. Dont forget to add the .run() in the end for the app to run!
@@ -34,7 +39,7 @@ fn main() {
 ```
 
 ## Startup function and particle creation
-To create particles we need to create materials and meshes for them. We do that by using structs
+To create particles we need to create materials and meshes for them. We do that by using structs.
 ``` rust
 
 //Simple struct to handle the  particles material
