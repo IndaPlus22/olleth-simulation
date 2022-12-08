@@ -1,6 +1,6 @@
 # olleth-simulation
 
-Chapter 1 :atom_symbol: particle system project :atom_symbol:
+Chapther 4-5 ish... :atom_symbol: particle system with an ounce of physics project :atom_symbol:
 
 ## Description
 The particle simulation runs on bevy, a relativly new rust game engine. The example folder contains the different stages of completetion. The src folder handles the physics behind the particles when they are spawned in. 
